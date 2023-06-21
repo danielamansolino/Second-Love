@@ -35,7 +35,7 @@ async function login(req,res) {
         //throw an error if they're not found
         if (!user) throw new Error()
         //compare the password(using bcrypt)
-        const march = await bcrypt.compare(req.body.password, user.password)
+        const match = await bcrypt.compare(req.body.password, user.password)
         // log them in if there is a match (create the token)
         if (match) {
             const token = createJWT(user)
