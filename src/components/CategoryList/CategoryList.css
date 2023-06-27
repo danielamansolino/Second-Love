@@ -1,0 +1,17 @@
+.CategoryList {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    
+  }
+  
+  .CategoryList li {
+    padding: 0 10px;
+  }
+  
+  #itemsCategory {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+  }
