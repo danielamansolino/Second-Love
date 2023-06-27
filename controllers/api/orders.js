@@ -1,13 +1,6 @@
 const Order = require('../../models/order');
 // const Item = require('../../models/item');
 
-module.exports = {
-  cart,
-  addToCart,
-  setItemQtyInCart,
-  checkout,
-};
-
 // A cart is the unpaid order for a user
 async function cart(req, res) {
   // A cart is the unpaid order for a user
@@ -33,6 +26,7 @@ async function setItemQtyInCart(req, res) {
 }
 
 // Update the cart's isPaid property to true
+// we can add the stock functionality here 
 async function checkout(req, res) {
   const cart = await Order.getCart(req.user._id);
   cart.isPaid = true;
@@ -40,3 +34,11 @@ async function checkout(req, res) {
   res.json(cart);
 
 }
+
+
+module.exports = {
+  cart,
+  addToCart,
+  setItemQtyInCart,
+  checkout,
+};

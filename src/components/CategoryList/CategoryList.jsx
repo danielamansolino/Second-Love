@@ -2,16 +2,28 @@ import './CategoryList.css'
 export default function CategoryList({ categories, activeCat, setActiveCat }) {
     const cats = categories.map(cat =>
       <div
+        style={{height:'50px', width:'50px' }}
         key={cat}
         className={cat === activeCat ? 'active' : ''}
         onClick={() => setActiveCat(cat)}
         id='itemsCategory'
       >
-        <img src={cat.picture} alt={cat.name} /> 
+        <img src={'https://imgur.com/yDOPADJ.png'} style={{height:'50px', width:'50px' }} alt={cat.name} /> 
         {cat} 
         
       </div>
+    //   <div
+    //   style={{ height: '80px', width: '80px' }}
+    //   key={cat.name}
+    //   className={cat.name === activeCat ? 'active' : ''}
+    //   onClick={() => setActiveCat(cat.name)}
+    //   id="itemsCategory"
+    // >
+    //   <img src={cat.picture} style={{ height: '50px', width: '50px' }} alt={cat.name} />
+    //   {cat.name}
+    // </div>
     );
+    console.log("this is cats", cats)
     return (
       <div className="CategoryList">
         
