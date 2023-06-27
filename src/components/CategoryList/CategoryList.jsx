@@ -7,7 +7,7 @@ export default function CategoryList({ categories, activeCat, setActiveCat }) {
         onClick={() => setActiveCat(cat)}
         id='itemsCategory'
       >
-        <img src={cat.picture} /> 
+        <img src={cat.picture} alt={cat.name} /> 
         {cat} 
         
       </div>
