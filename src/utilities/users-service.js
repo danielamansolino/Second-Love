@@ -25,7 +25,10 @@ export async function login(credentials) {
     throw new Error('Bad Credentials')
   }
 }
-
+// logout -> deletes the tokes from our local storage
+export function logOut() {
+  localStorage.removeItem('token');
+}
 // users-service.js
 // get token function -> assesses the token in local storage
 export function getToken() {
@@ -51,15 +54,12 @@ export function getUser() {
   return token ? JSON.parse(atob(token.split('.')[1])).user : null;
 }
 
-// logout -> deletes the tokes from our local storage
-export function logOut() {
-  localStorage.removeItem('token');
-}
 
-export function checkToken() {
-   // Just so that you don't forget how to use .then
-   return usersApi.checkToken()
-   // checkToken returns a string, but let's 
-   // make it a Date object for more flexibility
-    .then(dateStr => new Date(dateStr));
-}
+
+// export function checkToken() {
+//    // Just so that you don't forget how to use .then
+//    return usersApi.checkToken()
+//    // checkToken returns a string, but let's 
+//    // make it a Date object for more flexibility
+//     .then(dateStr => new Date(dateStr));
+// }

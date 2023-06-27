@@ -5,13 +5,15 @@
     
   }
   
-  .CategoryList li {
+  /* .CategoryList li {
     padding: 0 10px;
-  }
+  } */
   
   #itemsCategory {
-    display: flex;
+    display: grid;
     align-items: center;
     text-align: center;
+    margin-top: -50px;
+    margin-bottom: 80px;
 
   }

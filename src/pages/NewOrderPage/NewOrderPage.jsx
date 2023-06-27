@@ -32,6 +32,8 @@ export default function NewOrderPage({ user, setUser }) {
   getCart();
 
   }, []);
+
+  /*--- Event Handlers  ---*/ 
   async function handleAddToOrder(itemId) {
     // Baby step
     // alert(`add item: ${itemId}`);
