@@ -18,8 +18,14 @@ export default function NewOrderPage({ user, setUser }) {
     async function getItems() {
       const items = await itemsAPI.getAll();
       // Remove dups of category names using a Set, then spread Set back into an array literal
-      categoriesRef.current = [...new Set(items.map(item => item.category.name))];
-      // categoriesRef.current = [...new Set(items.map(item => ({ name: item.category.name, picture: item.category.picture })))];
+      // categoriesRef.current = [...new Set(items.map(item => item.category.name))];
+      // categoriesRef.current = [...new Set(items.map(item => item.category))];
+      // categoriesRef.current = [...new Set(items.map(item => ({ name: item.category.name, picture: item.category.picture})))];
+      const uniqueCategories = Array.from(new Set(items.map(item => item.category.name)));
+      categoriesRef.current = uniqueCategories.map(name => ({
+        name,
+        picture: items.find(item => item.category.name === name).category.picture
+      }));
       setMenuItems(items);
       setActiveCat(categoriesRef.current[0]);
     }
