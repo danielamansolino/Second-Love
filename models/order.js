@@ -110,33 +110,59 @@ orderSchema.statics.getCart = function(userId) {
 //   return cart.save();
 // };
 
-orderSchema.methods.addItemToCart = async function(itemId, quantity = 1) {
-    const cart = this;
-    const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
+orderSchema.methods.addItemToCart = async function(itemId) {
+  const cart = this;
+  const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
   
-    if (lineItem) {
-      lineItem.qty += quantity;
-    } else {
-      const Item = mongoose.model('Item');
-      const item = await Item.findById(itemId);
-  
-      if (item.stock < quantity) {
-        throw new Error('Insufficient stock.');
-      }
-  
-      cart.lineItems.push({ item, qty: quantity });
-      item.stock -= quantity;
-      await item.save();
+  if (lineItem) {
+    lineItem.qty += 1;
+  } else {
+    const Item = mongoose.model('Item');
+    const item = await Item.findById(itemId);
+    
+    if (item.stock <= 0) {
+      throw new Error('Item is out of stock.');
     }
+    cart.lineItems.push({ item, qty: 1 });
+    item.stock -= 1; 
+    
+    await item.save();
+  }
   
-    return cart.save();
-  };
+  return cart.save();
+};
+
+
+
+// orderSchema.methods.addItemToCart = async function(itemId) {
+//     const cart = this;
+//     const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
+//   console.log('this is lineItem in addItemToCart', lineItem)
+//     if (lineItem) {
+//       lineItem.qty += 1;
+//     } else {
+//       const Item = mongoose.model('Item');
+//       const item = await Item.findById(itemId);
+  
+//       if (item.stock < qty) {
+//         throw new Error('Insufficient stock.');
+//       }
+  
+//       cart.lineItems.push({ item, qty });
+//       item.stock -= qty;
+//       await item.save();
+//     }
+  
+//     return cart.save();
+//   };
   
 
 
 
 // Instance method to set an item's qty in the cart (will add item if does not exist)
-orderSchema.methods.setItemQty = function(itemId, newQty) {
+orderSchema.methods.setItemQty = async function(itemId, newQty) {
+  console.log('this is itemId', itemId)
+  console.log('this is newQty', newQty)
     // this keyword is bound to the cart (order doc)
     const cart = this;
     // Find the line item in the cart for the menu item
@@ -148,6 +174,14 @@ orderSchema.methods.setItemQty = function(itemId, newQty) {
     } else if (lineItem) {
       // Set the new qty - positive value is assured thanks to prev if
       lineItem.qty = newQty;
+      const Item = mongoose.model('Item');
+      const item = await Item.findById(itemId);
+      if (item.stock <= 0) {
+        throw new Error('Item is out of stock.');
+      }
+      item.stock -= 1; 
+      
+      await item.save();
     }
     // return the save() method's promise
     return cart.save();

@@ -8,7 +8,7 @@ export default function CategoryList({ categories, activeCat, setActiveCat }) {
       onClick={() => setActiveCat(cat.name)}
       id="itemsCategory"
     >
-      <img src={cat.picture} style={{ height: '50px', width: '50px' }} alt={cat.name} />
+      <img src={cat.picture} style={{ height: '150px', width: '150px' }} alt={cat.name} />
       {cat.name}
     </div>
     );

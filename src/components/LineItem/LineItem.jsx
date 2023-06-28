@@ -29,3 +29,4 @@ export default function LineItem({ lineItem, isPaid, handleChangeQty,}) {
     </div>
   );
 }
+
