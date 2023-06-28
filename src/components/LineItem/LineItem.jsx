@@ -3,7 +3,6 @@ export default function LineItem({ lineItem, isPaid, handleChangeQty,}) {
 
   return (
     <div className="LineItem">
-      <div className="flex-ctr-ctr">{lineItem.item.emoji}</div>
       <div className='lineItem-picture'>
       <img src={lineItem.item.picture} alt={lineItem.item.name} />
       </div>

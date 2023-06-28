@@ -20,7 +20,6 @@ export default function LoginForm({ setUser }) {
       // The promise returned by the signUp service method 
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
-      console.log('credentials in login', credentials)
       const user = await login(credentials);
       setUser(user);
     } catch {

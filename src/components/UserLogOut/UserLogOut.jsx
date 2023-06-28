@@ -1,6 +1,8 @@
 import { logOut } from '../../utilities/users-service';
 
 export default function UserLogOut({ user, setUser }) {
+  console.log('this is user in UserLogOut',user)
+  console.log('this is user.name in UserLogOut', user.name)
   function handleLogOut() {
     logOut();
     setUser(null);

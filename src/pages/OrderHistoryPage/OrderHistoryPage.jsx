@@ -7,6 +7,7 @@ import OrderList from '../../components/OrderList/OrderList';
 
 
 export default function OrderHistoryPage({ user, setUser }) {
+  console.log('this is user in OrderHistoryPage', user)
   const [orders, setOrders] = useState([]);
   const [activeOrder, setActiveOrder] = useState(null);
 
