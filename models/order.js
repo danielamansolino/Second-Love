@@ -91,23 +91,47 @@ orderSchema.statics.getCart = function(userId) {
 //     return cart.save();
 // };
 
-orderSchema.methods.addItemToCart = async function(itemId) {
-  const cart = this;
-  const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
-  if (lineItem) {
-      lineItem.qty += 1;
-  } else {
+// this function just decreases the stock by 1 for order 
+// orderSchema.methods.addItemToCart = async function(itemId) {
+//   const cart = this;
+//   const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
+//   if (lineItem) {
+//       lineItem.qty += 1;
+//   } else {
+//       const Item = mongoose.model('Item');
+//       const item = await Item.findById(itemId);
+//       if (item.stock <= 0) {
+//           throw new Error('Item is out of stock.');
+//       }
+//       cart.lineItems.push({ item });
+//       item.stock -= 1; 
+//       await item.save(); 
+//   }
+//   return cart.save();
+// };
+
+orderSchema.methods.addItemToCart = async function(itemId, quantity = 1) {
+    const cart = this;
+    const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
+  
+    if (lineItem) {
+      lineItem.qty += quantity;
+    } else {
       const Item = mongoose.model('Item');
       const item = await Item.findById(itemId);
-      if (item.stock <= 0) {
-          throw new Error('Item is out of stock.');
+  
+      if (item.stock < quantity) {
+        throw new Error('Insufficient stock.');
       }
-      cart.lineItems.push({ item });
-      item.stock -= 1; 
-      await item.save(); 
-  }
-  return cart.save();
-};
+  
+      cart.lineItems.push({ item, qty: quantity });
+      item.stock -= quantity;
+      await item.save();
+    }
+  
+    return cart.save();
+  };
+  
 
 
 
