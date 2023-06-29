@@ -2,6 +2,7 @@
     display: flex;
     list-style: none;
     justify-content: space-around;
+    margin: 0vmin;
     
   }
   
@@ -15,5 +16,4 @@
     text-align: center;
     margin-top: -90px;
     margin-bottom: 120px;
-
   }

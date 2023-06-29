@@ -1,6 +1,11 @@
 .nav {
-    background-color: #d0d1cc;
+    background-color: #36454F;
     padding-bottom: 10vmin;
     padding-top: 3vmin;
     margin: 0vmin;
+    color: white;
+}
+
+h1 {
+    font-size: 10vmin;
 }
