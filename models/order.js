@@ -65,51 +65,6 @@ orderSchema.statics.getCart = function(userId) {
     );
   };
 
-// // Instance method for adding an item to a cart (unpaid order)
-// orderSchema.methods.addItemToCart = async function(itemId) {
-//     // 'this' keyword is bound to the cart (order doc)
-//     const cart = this;
-//     // Check if the item already exists in the cart
-//     // if there is a line already (hotdog) we want to increase the number of items (hotdog)
-//     // Mongoose id are unique so we HAVE TO use equals method to compare
-//     const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
-//     if (lineItem) {
-//       // It already exists, so increase the qty
-//       lineItem.qty += 1;
-//     } else {
-//         // if there is not line or !already a hotdog in there we want to add it 
-//       // Get the item from the "catalog"
-//       // Note how the mongoose.model method behaves as a getter when passed one arg vs. two
-//       const Item = mongoose.model('Item');
-//       //because this items are mongoose documents we have to get them someway. Hence .findById
-//       const item = await Item.findById(itemId);
-//       // The qty of the new lineItem object being pushed in defaults to 1
-//       cart.lineItems.push({ item });
-//     }
-//     // return the save() method's promise
-//     // we always want to save our document when we modify it
-//     return cart.save();
-// };
-
-// this function just decreases the stock by 1 for order 
-// orderSchema.methods.addItemToCart = async function(itemId) {
-//   const cart = this;
-//   const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
-//   if (lineItem) {
-//       lineItem.qty += 1;
-//   } else {
-//       const Item = mongoose.model('Item');
-//       const item = await Item.findById(itemId);
-//       if (item.stock <= 0) {
-//           throw new Error('Item is out of stock.');
-//       }
-//       cart.lineItems.push({ item });
-//       item.stock -= 1; 
-//       await item.save(); 
-//   }
-//   return cart.save();
-// };
-
 orderSchema.methods.addItemToCart = async function(itemId) {
   const cart = this;
   const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
@@ -123,6 +78,7 @@ orderSchema.methods.addItemToCart = async function(itemId) {
     if (item.stock <= 0) {
       throw new Error('Item is out of stock.');
     }
+    
     cart.lineItems.push({ item, qty: 1 });
     item.stock -= 1; 
     
@@ -133,58 +89,41 @@ orderSchema.methods.addItemToCart = async function(itemId) {
 };
 
 
-
-// orderSchema.methods.addItemToCart = async function(itemId) {
-//     const cart = this;
-//     const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
-//   console.log('this is lineItem in addItemToCart', lineItem)
-//     if (lineItem) {
-//       lineItem.qty += 1;
-//     } else {
-//       const Item = mongoose.model('Item');
-//       const item = await Item.findById(itemId);
-  
-//       if (item.stock < qty) {
-//         throw new Error('Insufficient stock.');
-//       }
-  
-//       cart.lineItems.push({ item, qty });
-//       item.stock -= qty;
-//       await item.save();
-//     }
-  
-//     return cart.save();
-//   };
-  
-
-
-
-// Instance method to set an item's qty in the cart (will add item if does not exist)
 orderSchema.methods.setItemQty = async function(itemId, newQty) {
-  console.log('this is itemId', itemId)
-  console.log('this is newQty', newQty)
-    // this keyword is bound to the cart (order doc)
-    const cart = this;
-    // Find the line item in the cart for the menu item
-    const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
-    if (lineItem && newQty <= 0) {
-      // Calling deleteOne(), removes itself from the cart.lineItems array
-      // Note that video shows remove(), which has been removed 😀 in Mongoose v7
-      lineItem.deleteOne();
-    } else if (lineItem) {
-      // Set the new qty - positive value is assured thanks to prev if
-      lineItem.qty = newQty;
-      const Item = mongoose.model('Item');
-      const item = await Item.findById(itemId);
-      if (item.stock <= 0) {
-        throw new Error('Item is out of stock.');
-      }
-      item.stock -= 1; 
-      
-      await item.save();
+  const cart = this;
+  const lineItemIndex = cart.lineItems.findIndex(lineItem => lineItem.item._id.equals(itemId));
+  
+  if (lineItemIndex !== -1 && newQty <= 0) {
+    // Remove the line item from the array using splice
+    const lineItem = cart.lineItems[lineItemIndex];
+    cart.lineItems.splice(lineItemIndex, 1);
+
+    const Item = mongoose.model('Item');
+    const item = await Item.findById(itemId);
+    // Add the previous quantity back to the stock
+    item.stock += lineItem.qty; 
+    await item.save();
+  } else if (lineItemIndex !== -1) {
+    const lineItem = cart.lineItems[lineItemIndex];
+    // Calculate the difference in quantity
+    const difference = newQty - lineItem.qty; 
+
+    const Item = mongoose.model('Item');
+    const item = await Item.findById(itemId);
+
+    if (item.stock < difference) {
+      throw new Error('Insufficient stock.');
     }
-    // return the save() method's promise
-    return cart.save();
+    // Adjust the stock based on the quantity difference
+    item.stock -= difference; 
+    await item.save();
+
+    lineItem.qty = newQty; 
+  }
+  
+  return cart.save();
 };
+
+
 
 module.exports = mongoose.model('Order', orderSchema )

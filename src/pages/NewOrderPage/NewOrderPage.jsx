@@ -74,7 +74,7 @@ export default function NewOrderPage({ user, setUser }) {
         handleAddToOrder={handleAddToOrder}
       />
       <br/>
-      <OrderDetail order={cart} handleChangeQty={handleChangeQty} handleCheckout={handleCheckout}/>
+      <OrderDetail order={cart} handleChangeQty={handleChangeQty} handleCheckout={handleCheckout} />
       <br/>
       <Link to="/orders" className="button btn-sm">PREVIOUS ORDERS</Link>
       <br/><br/>
