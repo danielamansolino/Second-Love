@@ -4,8 +4,25 @@
     padding-top: 3vmin;
     margin: 0vmin;
     color: white;
-}
-
-h1 {
+    
+  }
+  
+  h1 {
     font-size: 10vmin;
-}
+  }
+  
+  .nav-link {
+    color: white;
+  }
+  
+  #cart {
+    position: absolute; /* Add this to position the cart absolutely within the .nav container */
+    top: 30px; /* Adjust the top value to position the cart vertically */
+    right: 40px; /* Adjust the right value to position the cart horizontally */
+  }
+  
+  #cart img {
+    width: 40px;
+    height: 40px;
+  }
+  

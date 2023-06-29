@@ -195,8 +195,8 @@ export default function LineItem({ lineItem, isPaid, handleChangeQty }) {
       <div className="ext-price">${lineItem.extPrice.toFixed(2)}</div>
       {!isItemAvailable && <div className="error-message">{errorMessage}</div>}
       {!isPaid && (
-        <button className="btn-xs" onClick={handleRemoveItem}>
-          Remove
+        <button className="btn-sm" onClick={handleRemoveItem}>
+          REMOVE ITEM FROM CART
         </button>
       )}
     </div>

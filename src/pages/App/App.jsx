@@ -5,6 +5,7 @@ import NewOrderPage from '../NewOrderPage/NewOrderPage';
 import AuthPage from '../AuthPage/AuthPage';
 import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage';
 import NavBar from '../../components/NavBar/NavBar'
+import Cart from '../Cart/Cart'
 import { getUser } from '../../utilities/users-service';
 
 export default function App() {
@@ -18,6 +19,9 @@ export default function App() {
         <Routes>
           <Route path="/orders/new" element={<NewOrderPage user={user} setUser={setUser} />} />
           <Route path="/orders" element={<OrderHistoryPage user={user} setUser={setUser} />} />
+          <Route path="/orders/cart" element={<Cart user={user} setUser={setUser} />} />
+          <Route path="/items/:itemId" element={<MenuItemDetail />} />
+          {/* <Route path="/orders/new/items/:itemId" element={<MenuItemDetail />} /> */}
           {/* redirect to /orders/new if path in address bar hasn't matched a <Route> above */}
           <Route path="/*" element={<Navigate to="/orders/new" />} />
         </Routes>

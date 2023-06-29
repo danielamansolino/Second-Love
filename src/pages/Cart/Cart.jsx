@@ -2,11 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import * as itemsAPI from '../../utilities/items-api'
 import * as ordersAPI from '../../utilities/orders-api'
 import { Link, useNavigate } from 'react-router-dom';
-import MenuList from '../../components/MenuList/MenuList';
-import CategoryList from '../../components/CategoryList/CategoryList';
+import OrderDetail from '../../components/OrderDetail/OrderDetail';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 
-export default function NewOrderPage({ user, setUser }) {
+export default function Cart({ user, setUser }) {
   const [menuItems, setMenuItems] = useState([]);
   const [activeCat, setActiveCat] = useState('');
   const [cart, setCart] = useState(null);
@@ -39,15 +38,6 @@ export default function NewOrderPage({ user, setUser }) {
   }, []);
 
   /*--- Event Handlers  ---*/ 
-  async function handleAddToOrder(itemId) {
-    // Baby step
-    // alert(`add item: ${itemId}`);
-    // alert(`add item: ${itemId}`);
-    // 1. Call the addItemToCart function in ordersAPI, passing to it the itemId, and assign the resolved promise to a variable named cart.
-    // 2. Update the cart state with the updated cart received from the server
-    const updatedCart = await ordersAPI.addItemToCart(itemId)
-    setCart(updatedCart)
-  }
 
   async function handleChangeQty(itemId, newQty) {
     const updatedCart = await ordersAPI.setItemQtyInCart(itemId, newQty);
@@ -59,25 +49,16 @@ export default function NewOrderPage({ user, setUser }) {
     navigate('/orders');
   }
   return (
-    <main className="NewOrderPage">
-      <aside>
-      <br/>
-        <CategoryList
-        categories={categoriesRef.current}
-        activeCat={activeCat}
-        setActiveCat={setActiveCat}
-        /> <br/>
-      </aside>
-      <MenuList
-        menuItems={menuItems.filter(item => item.category.name === activeCat)}
-        handleAddToOrder={handleAddToOrder}
-      />
-      <br/>
-      {/* <OrderDetail order={cart} handleChangeQty={handleChangeQty} handleCheckout={handleCheckout} /> */}
-      <br/>
-      {/* <Link to="/orders" className="button btn-sm">PREVIOUS ORDERS</Link> */}
-      <br/><br/>
-      <UserLogOut user={user} setUser={setUser} />
-    </main>
+    <div className="NewOrderPage">
+        <br/><br/>
+        <Link to="/orders/new" className="button btn-sm">CONTINUE SHOOPING</Link>
+        <br/><br/>
+        <br/>
+        <OrderDetail order={cart} handleChangeQty={handleChangeQty} handleCheckout={handleCheckout} />
+        <br/>
+        <Link to="/orders" className="button btn-sm">PREVIOUS ORDERS</Link>
+        <br/><br/>
+        <UserLogOut user={user} setUser={setUser} />
+    </div>
     );
   }
