@@ -1,24 +1,19 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as itemsAPI from '../../utilities/items-api'
 import * as ordersAPI from '../../utilities/orders-api'
 import { Link, useNavigate } from 'react-router-dom';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 
-export default function Cart({ user, setUser }) {
-  const [menuItems, setMenuItems] = useState([]);
-  const [activeCat, setActiveCat] = useState('');
-  const [cart, setCart] = useState(null);
+export default function Cart({ user, setUser, menuItems, setMenuItems, activeCat, setActiveCat, getCart, cart, setCart}) {
+//   const [cart, setCart] = useState(null);
   const categoriesRef = useRef([]);
   const navigate = useNavigate();
 
   useEffect(function() {
     async function getItems() {
       const items = await itemsAPI.getAll();
-      // Remove dups of category names using a Set, then spread Set back into an array literal
-      // categoriesRef.current = [...new Set(items.map(item => item.category.name))];
-      // categoriesRef.current = [...new Set(items.map(item => item.category))];
-      // categoriesRef.current = [...new Set(items.map(item => ({ name: item.category.name, picture: item.category.picture})))];
+
       const uniqueCategories = Array.from(new Set(items.map(item => item.category.name)));
       categoriesRef.current = uniqueCategories.map(name => ({
         name,
@@ -28,14 +23,10 @@ export default function Cart({ user, setUser }) {
       setActiveCat(categoriesRef.current[0]);
     }
     getItems();
-     // Load cart (a cart is the unpaid order for the logged in user)
-    async function getCart() {
-      const cart = await ordersAPI.getCart();
-      setCart(cart);
-  }
+
   getCart();
 
-  }, []);
+  }, [getCart, setActiveCat, setMenuItems]);
 
   /*--- Event Handlers  ---*/ 
 
@@ -48,6 +39,7 @@ export default function Cart({ user, setUser }) {
     await ordersAPI.checkout();
     navigate('/orders');
   }
+  
   return (
     <div className="NewOrderPage">
         <br/><br/>
