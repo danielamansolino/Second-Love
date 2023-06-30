@@ -4,7 +4,7 @@ import CategoryList from '../../components/CategoryList/CategoryList';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 
 
-export default function NewOrderPage({ user, setUser,menuItems, setMenuItems, activeCat, setActiveCat, cart, setCart, categoriesRef }) {
+export default function NewOrderPage({ user, setUser,menuItems, setMenuItems, activeCat, setActiveCat, cart, setCart, categoriesRef,  }) {
   
   /*--- Event Handlers  ---*/ 
   async function handleAddToOrder(itemId) {

@@ -10,6 +10,7 @@ import Cart from '../Cart/Cart'
 import { getUser } from '../../utilities/users-service';
 import * as itemsAPI from '../../utilities/items-api'
 import * as ordersAPI from '../../utilities/orders-api'
+import { useLocation } from 'react-router-dom';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -18,6 +19,7 @@ export default function App() {
   const [cart, setCart] = useState(null);
   const categoriesRef = useRef([]);
   const { itemId } = useParams();
+  const location = useLocation();
   
   async function getCart() {
     const cart = await ordersAPI.getCart();
@@ -77,6 +79,7 @@ export default function App() {
                 setActiveCat={setActiveCat} 
                 cart={cart} setCart={setCart} 
                 categoriesRef={categoriesRef} 
+                // handleAddToOrder={handleAddToOrder}
                 />
               } 
             />
@@ -117,6 +120,9 @@ export default function App() {
               activeCat={activeCat} 
               setActiveCat={setActiveCat} 
               itemId={itemId}
+              // menuItem={menuItems.find(item => item._id === itemId)}
+              menuItem={location.state?.menuItem}
+              // handleAddToOrder={handleAddToOrder}
               />
             } 
           />

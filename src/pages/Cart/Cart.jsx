@@ -10,23 +10,23 @@ export default function Cart({ user, setUser, menuItems, setMenuItems, activeCat
   const categoriesRef = useRef([]);
   const navigate = useNavigate();
 
-  useEffect(function() {
-    async function getItems() {
-      const items = await itemsAPI.getAll();
+//   useEffect(function() {
+//     async function getItems() {
+//       const items = await itemsAPI.getAll();
 
-      const uniqueCategories = Array.from(new Set(items.map(item => item.category.name)));
-      categoriesRef.current = uniqueCategories.map(name => ({
-        name,
-        picture: items.find(item => item.category.name === name).category.picture
-      }));
-      setMenuItems(items);
-      setActiveCat(categoriesRef.current[0]);
-    }
-    getItems();
+//       const uniqueCategories = Array.from(new Set(items.map(item => item.category.name)));
+//       categoriesRef.current = uniqueCategories.map(name => ({
+//         name,
+//         picture: items.find(item => item.category.name === name).category.picture
+//       }));
+//       setMenuItems(items);
+//       setActiveCat(categoriesRef.current[0]);
+//     }
+//     getItems();
 
-  getCart();
+//   getCart();
 
-  }, [getCart, setActiveCat, setMenuItems]);
+//   }, [getCart, setActiveCat, setMenuItems]);
 
   /*--- Event Handlers  ---*/ 
 
