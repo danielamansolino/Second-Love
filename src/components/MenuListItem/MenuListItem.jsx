@@ -1,4 +1,7 @@
 import './MenuListItem.css';
+import { Link } from 'react-router-dom'
+import MenuItemDetail from '../MenuItemDetail/MenuItemDetail';
+
 
 export default function MenuListItem({ menuItem, handleAddToOrder }) {
   const isItemAvailable = menuItem.stock > 0;
@@ -8,11 +11,13 @@ export default function MenuListItem({ menuItem, handleAddToOrder }) {
       handleAddToOrder(menuItem._id);
     }
   };
-  console.log('this is menuItem', menuItem)
+  console.log('this is menuItem in MenuListItem', menuItem)
   return (
     <div className="MenuListItem">
       <div className="picture">
+        <Link to={`/items/${menuItem._id}`}>
         <img src={menuItem.picture} alt={menuItem.name} />
+        </Link>
       </div>
       <div className="name">{menuItem.name}</div>
       <div className="buy">

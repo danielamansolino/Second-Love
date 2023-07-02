@@ -4,6 +4,7 @@ import * as ordersAPI from '../../utilities/orders-api';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
 import OrderList from '../../components/OrderList/OrderList';
+import './OrderHistoryPage.css'
 
 
 export default function OrderHistoryPage({ user, setUser }) {
@@ -27,15 +28,20 @@ export default function OrderHistoryPage({ user, setUser }) {
         <Link to="/orders/new" className="button btn-sm">NEW ORDER</Link>
         <br/><br/>
       </aside>
-      {/* Render an OrderList component (needs to be coded) */}
+      <div className="order-container">
       <OrderList
         orders={orders}
         activeOrder={activeOrder}
         setActiveOrder={setActiveOrder}
       />
-      <UserLogOut user={user} setUser={setUser} />
-      {/* Render the existing OrderDetail component */}
+      <div className="order-column">
       <OrderDetail order={activeOrder} />
+      <br/><br/>
+      <UserLogOut user={user} setUser={setUser} />
+      </div>
+     
+   
+      </div>
     </main>
   );
 }

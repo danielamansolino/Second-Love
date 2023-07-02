@@ -1,4 +1,5 @@
 import OrderListItem from '../OrderListItem/OrderListItem';
+import './OrderList.css';
 
 export default function OrderList({ orders, activeOrder, setActiveOrder }) {
 
