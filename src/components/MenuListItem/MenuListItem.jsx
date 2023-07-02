@@ -1,5 +1,6 @@
 import './MenuListItem.css';
 import { Link } from 'react-router-dom'
+import MenuItemDetail from '../MenuItemDetail/MenuItemDetail';
 
 
 export default function MenuListItem({ menuItem, handleAddToOrder }) {
@@ -13,7 +14,6 @@ export default function MenuListItem({ menuItem, handleAddToOrder }) {
   console.log('this is menuItem in MenuListItem', menuItem)
   return (
     <div className="MenuListItem">
-      
       <div className="picture">
         <Link to={`/items/${menuItem._id}`}>
         <img src={menuItem.picture} alt={menuItem.name} />

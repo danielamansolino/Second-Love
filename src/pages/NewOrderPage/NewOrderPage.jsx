@@ -4,18 +4,18 @@ import CategoryList from '../../components/CategoryList/CategoryList';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 
 
-export default function NewOrderPage({ user, setUser,menuItems, setMenuItems, activeCat, setActiveCat, cart, setCart, categoriesRef,  }) {
+export default function NewOrderPage({ user, setUser,menuItems, setMenuItems, activeCat, setActiveCat, cart, setCart, categoriesRef, handleAddToOrder }) {
   
-  /*--- Event Handlers  ---*/ 
-  async function handleAddToOrder(itemId) {
-    // Baby step
-    // alert(`add item: ${itemId}`);
-    // alert(`add item: ${itemId}`);
-    // 1. Call the addItemToCart function in ordersAPI, passing to it the itemId, and assign the resolved promise to a variable named cart.
-    // 2. Update the cart state with the updated cart received from the server
-    const updatedCart = await ordersAPI.addItemToCart(itemId)
-    setCart(updatedCart)
-  }
+  // /*--- Event Handlers  ---*/ 
+  // async function handleAddToOrder(itemId) {
+  //   // Baby step
+  //   // alert(`add item: ${itemId}`);
+  //   // alert(`add item: ${itemId}`);
+  //   // 1. Call the addItemToCart function in ordersAPI, passing to it the itemId, and assign the resolved promise to a variable named cart.
+  //   // 2. Update the cart state with the updated cart received from the server
+  //   const updatedCart = await ordersAPI.addItemToCart(itemId)
+  //   setCart(updatedCart)
+  // }
 
   // async function handleChangeQty(itemId, newQty) {
   //   const updatedCart = await ordersAPI.setItemQtyInCart(itemId, newQty);

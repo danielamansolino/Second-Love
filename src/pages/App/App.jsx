@@ -49,15 +49,15 @@ export default function App() {
   }, []);
 
    /*--- Event Handlers  ---*/ 
-  //  async function handleAddToOrder(itemId) {
-  //   // Baby step
-  //   // alert(`add item: ${itemId}`);
-  //   // alert(`add item: ${itemId}`);
-  //   // 1. Call the addItemToCart function in ordersAPI, passing to it the itemId, and assign the resolved promise to a variable named cart.
-  //   // 2. Update the cart state with the updated cart received from the server
-  //   const updatedCart = await ordersAPI.addItemToCart(itemId)
-  //   setCart(updatedCart)
-  // }
+   async function handleAddToOrder(itemId) {
+    // Baby step
+    // alert(`add item: ${itemId}`);
+    // alert(`add item: ${itemId}`);
+    // 1. Call the addItemToCart function in ordersAPI, passing to it the itemId, and assign the resolved promise to a variable named cart.
+    // 2. Update the cart state with the updated cart received from the server
+    const updatedCart = await ordersAPI.addItemToCart(itemId)
+    setCart(updatedCart)
+  }
 
 
 
@@ -79,7 +79,7 @@ export default function App() {
                 setActiveCat={setActiveCat} 
                 cart={cart} setCart={setCart} 
                 categoriesRef={categoriesRef} 
-                // handleAddToOrder={handleAddToOrder}
+                handleAddToOrder={handleAddToOrder}
                 />
               } 
             />
@@ -122,7 +122,7 @@ export default function App() {
               // itemId={itemId}
               // menuItem={menuItems.find(item => item._id === itemId)}
               // menuItem={location.state?.menuItem}
-              // handleAddToOrder={handleAddToOrder}
+              handleAddToOrder={handleAddToOrder}
               />
             } 
           />
