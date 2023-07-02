@@ -119,9 +119,9 @@ export default function App() {
               setMenuItems={setMenuItems} 
               activeCat={activeCat} 
               setActiveCat={setActiveCat} 
-              itemId={itemId}
+              // itemId={itemId}
               // menuItem={menuItems.find(item => item._id === itemId)}
-              menuItem={location.state?.menuItem}
+              // menuItem={location.state?.menuItem}
               // handleAddToOrder={handleAddToOrder}
               />
             } 

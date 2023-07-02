@@ -1,3 +1,5 @@
+import './OrderListItem.css';
+
 export default function OrderListItem({ order, activeOrder, setActiveOrder }) {
     return (
       <div

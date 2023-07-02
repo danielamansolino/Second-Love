@@ -2,24 +2,27 @@ import '../MenuListItem/MenuListItem.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export default function MenuItemDetail({ menuItems, handleAddToOrder, menuItem }) {
+
+export default function MenuItemDetail({ menuItems, handleAddToOrder, menuItem}) {
   console.log('this is menuItems in MenuItemDetail', menuItems)
- const { itemId } = useParams();
- const [ item, setItem ] = useState(null);
+  // const menuItem = menuItems.find(item => item._id === menuItem._id)
 
- function getItem(){
-  return menuItems.find(item => item.id === itemId)
- }
+  // const { itemId } = useParams();
+  // const [ item, setItem ] = useState(null);
 
- useEffect(() => {
-  const foundItem = getItem(); 
-  setItem(foundItem);
- }, [] )
+  // function getItem(){
+  //   return menuItems.find(item => item.id === itemId)
+  // }
 
-  if (!menuItem) {
-    // Handle case when menuItem is not found or still loading
-    return <div>Loading...</div>;
-  }
+  // useEffect(() => {
+  //   const foundItem = getItem(); 
+  //   setItem(foundItem);
+  // }, [] )
+
+    if (!menuItem) {
+      // Handle case when menuItem is not found or still loading
+      return <div>Loading...</div>;
+    }
   // const items = menuItems.map(item => (
   //   <Link key={item._id} to={`/items/${item._id}`}>
   //     <MenuListItem menuItem={item} />
@@ -55,3 +58,4 @@ export default function MenuItemDetail({ menuItems, handleAddToOrder, menuItem }
     </div>
   );
 }
+
