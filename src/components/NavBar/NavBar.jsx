@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
 import * as userService from "../../utilities/users-service";
 import './NavBar.css';
-// import LineItem from '../LineItem/LineItem';
 
 export default function NavBar({ user, setUser }) {
   function handleLogOut() {
     userService.logOut();
     setUser(null);
   }
-
   return (
     <div className='nav'>
        <Link to="/orders/cart" className="nav-link" id='cart'><img src={'https://imgur.com/C0hdTG6.png'} alt={'CART'} /></Link>

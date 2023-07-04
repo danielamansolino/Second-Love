@@ -10,29 +10,3 @@
     object-fit: cover;
 } 
 
-/* .MenuListItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.picture {
-    width: 200px; 
-    height: 300px; 
-    overflow: hidden;
-}
-
-.picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.MenuListItem .name {
-    margin-top: 10px;
-}
-
-.MenuListItem .buy {
-    margin-top: 10px;
-} */

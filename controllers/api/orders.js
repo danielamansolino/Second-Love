@@ -1,5 +1,4 @@
 const Order = require('../../models/order');
-// const Item = require('../../models/item');
 
 async function getAllForUser(req, res) {
   const orders = await Order.find({user: req.user._id, isPaid: true}).sort('-updatedAt');
@@ -8,7 +7,6 @@ async function getAllForUser(req, res) {
 
 // A cart is the unpaid order for a user
 async function cart(req, res) {
-  // A cart is the unpaid order for a user
   const cart = await Order.getCart(req.user._id);
   res.json(cart);
 }

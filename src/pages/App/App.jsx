@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import NewOrderPage from '../NewOrderPage/NewOrderPage';
 import AuthPage from '../AuthPage/AuthPage';
@@ -10,7 +10,6 @@ import Cart from '../Cart/Cart'
 import { getUser } from '../../utilities/users-service';
 import * as itemsAPI from '../../utilities/items-api'
 import * as ordersAPI from '../../utilities/orders-api'
-import { useLocation } from 'react-router-dom';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -18,8 +17,6 @@ export default function App() {
   const [activeCat, setActiveCat] = useState('');
   const [cart, setCart] = useState(null);
   const categoriesRef = useRef([]);
-  const { itemId } = useParams();
-  const location = useLocation();
   
   async function getCart() {
     const cart = await ordersAPI.getCart();
@@ -59,8 +56,6 @@ export default function App() {
     setCart(updatedCart)
   }
 
-
-
   return (
     <main className="App">
       { user ?
@@ -83,7 +78,6 @@ export default function App() {
                 />
               } 
             />
-          {/* <Route path="/orders/new" element={<NewOrderPage user={user} setUser={setUser} menuItems={menuItems} setMenuItems={setMenuItems} activeCat={activeCat} setActiveCat={setActiveCat} cart={cart} setCart={setCart} categoriesRef={categoriesRef} handleAddToOrder={handleAddToOrder}/>} /> */}
           <Route 
           path="/orders" 
           element={
@@ -96,17 +90,17 @@ export default function App() {
           <Route 
             path="/orders/cart" 
             element={
-            <Cart 
-              user={user} 
-              setUser={setUser} 
-              menuItems={menuItems} 
-              setMenuItems={setMenuItems} 
-              activeCat={activeCat} 
-              setActiveCat={setActiveCat} 
-              getCart={getCart} 
-              cart={cart} 
-              setCart={setCart}
-              />
+              <Cart 
+                user={user} 
+                setUser={setUser} 
+                menuItems={menuItems} 
+                setMenuItems={setMenuItems} 
+                activeCat={activeCat} 
+                setActiveCat={setActiveCat} 
+                getCart={getCart} 
+                cart={cart} 
+                setCart={setCart}
+                />
             } 
           />
           <Route 
@@ -119,15 +113,10 @@ export default function App() {
               setMenuItems={setMenuItems} 
               activeCat={activeCat} 
               setActiveCat={setActiveCat} 
-              // itemId={itemId}
-              // menuItem={menuItems.find(item => item._id === itemId)}
-              // menuItem={location.state?.menuItem}
               handleAddToOrder={handleAddToOrder}
               />
             } 
           />
-          {/* <Route path="/orders/new/items/:itemId" element={<MenuItemDetail />} /> */}
-          {/* redirect to /orders/new if path in address bar hasn't matched a <Route> above */}
           <Route path="/*" element={<Navigate to="/orders/new" />} />
         </Routes>
         </>

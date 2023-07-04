@@ -6,7 +6,6 @@ import OrderDetail from '../../components/OrderDetail/OrderDetail';
 import OrderList from '../../components/OrderList/OrderList';
 import './OrderHistoryPage.css'
 
-
 export default function OrderHistoryPage({ user, setUser }) {
   console.log('this is user in OrderHistoryPage', user)
   const [orders, setOrders] = useState([]);
@@ -39,8 +38,6 @@ export default function OrderHistoryPage({ user, setUser }) {
       <br/><br/>
       <UserLogOut user={user} setUser={setUser} />
       </div>
-     
-   
       </div>
     </main>
   );

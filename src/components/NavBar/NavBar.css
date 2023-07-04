@@ -16,9 +16,9 @@
   }
   
   #cart {
-    position: absolute; /* Add this to position the cart absolutely within the .nav container */
-    top: 30px; /* Adjust the top value to position the cart vertically */
-    right: 40px; /* Adjust the right value to position the cart horizontally */
+    position: absolute; 
+    top: 30px; 
+    right: 40px; 
   }
   
   #cart img {
