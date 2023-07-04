@@ -5,11 +5,7 @@
     margin: 0vmin;
     
   }
-  
-  /* .CategoryList li {
-    padding: 0 10px;
-  } */
-  
+
   #itemsCategory {
     display: grid;
     align-items: center;

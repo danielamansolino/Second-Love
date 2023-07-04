@@ -5,7 +5,6 @@ const logger = require('morgan');
 require('dotenv').config();
 require('./config/database');
 
-
 const app = express();
 
 app.use(logger('dev'));
@@ -32,7 +31,11 @@ const ensureLoggedIn = require('./config/ensureLoggedIn');
 app.use('/api/items', ensureLoggedIn, require('./routes/api/items'));
 app.use('/api/orders', ensureLoggedIn, require('./routes/api/orders'));
 
-// reviews
+
+// Register the review routes
+// app.use('/api/reviews', require('./routes/api/reviews'));
+app.use('/api', ensureLoggedIn, require('./routes/api/reviews'));
+
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
