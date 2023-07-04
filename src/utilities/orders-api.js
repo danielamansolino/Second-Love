@@ -1,6 +1,7 @@
 import sendRequest from './send-request';
 
-const BASE_URL = '/api/orders';
+// const BASE_URL = '/api/orders';
+const BASE_URL = 'https://second-love-api.onrender.com/api/orders';
 
 // Retrieve an unpaid order for the logged in user
 export function getCart() {

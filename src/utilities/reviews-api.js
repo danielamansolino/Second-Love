@@ -1,6 +1,7 @@
 import sendRequest from './send-request';
 
-const BASE_URL = '/api';
+// const BASE_URL = '/api';
+const BASE_URL = 'https://second-love-api.onrender.com/api';
 
 // Retrieve all reviews
 export function getAll() {
