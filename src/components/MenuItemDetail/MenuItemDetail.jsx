@@ -63,6 +63,7 @@ export default function MenuItemDetail({ menuItems, handleAddToOrder, user }) {
 
   return (
     <div className="MenuListItem">
+      <br /><br />
       <div className="picture">
         <img src={menuItem.picture} alt={menuItem.name} />
       </div>

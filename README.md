@@ -9,11 +9,11 @@
 
 ![MAIN-PAGE](https://imgur.com/tSBRJfK.jpg)
 
-![CART](https://imgur.com/ExfaUDg.jpg)
+![CART](https://imgur.com/eIGKH1A.jpg)
 
-![ITEM-DETAL-PAGE](https://imgur.com/xzJbCxM.jpg)
+![ITEM-DETAL-PAGE](https://imgur.com/deURaJa.jpg)
 
-![ORDER-HISTORY-PAGE](https://imgur.com/pPhG8sD.jpg)
+![ORDER-HISTORY-PAGE](https://imgur.com/AnfvgWm.jpg)
 
 
 ## Technologies Used: 
