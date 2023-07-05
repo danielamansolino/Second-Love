@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const cors = require('cors')
 require('dotenv').config();
 require('./config/database');
 
@@ -14,6 +15,10 @@ app.use(express.json());
 // to serve from the production 'build' folder
 // app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
+
+app.use(cors({
+  origin:['http://localhost:3000','https://second-love-1jkc.onrender.com']
+}))
 
 // Middleware to verify token and assign user object of payload to req.user.
 // Be sure to mount before routes
