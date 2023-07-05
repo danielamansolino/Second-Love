@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './LineItem.css';
 
 export default function LineItem({ lineItem, isPaid, handleChangeQty }) {
+
   const [isItemAvailable, setIsItemAvailable] = useState(lineItem.item.stock > 0);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -37,7 +38,7 @@ export default function LineItem({ lineItem, isPaid, handleChangeQty }) {
       <div className="qty" style={{ justifyContent: isPaid && 'center' }}>
         {!isPaid && (
           <button
-            className="btn-xs"
+            className="btn-sm"
             onClick={handleDecreaseQty}
             disabled={lineItem.qty <= 1}
           >
@@ -47,7 +48,7 @@ export default function LineItem({ lineItem, isPaid, handleChangeQty }) {
         <span>{lineItem.qty}</span>
         {!isPaid && (
           <button
-            className="btn-xs"
+            className="btn-sm"
             onClick={handleIncreaseQty}
             disabled={!isItemAvailable}
           >
@@ -55,7 +56,7 @@ export default function LineItem({ lineItem, isPaid, handleChangeQty }) {
           </button>
         )}
       </div>
-      <div className="ext-price">${lineItem.extPrice.toFixed(2)}</div>
+      <div className="ext-price"> ${lineItem.extPrice.toFixed(2)}</div>
       {!isItemAvailable && <div className="error-message">{errorMessage}</div>}
       {!isPaid && (
         <button className="btn-sm" onClick={handleRemoveItem}>

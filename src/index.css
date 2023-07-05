@@ -159,3 +159,27 @@ button[type="submit"] {
   margin: 1vmin 0 0;
 }
 
+button,
+a.button {
+  /* Existing styles */
+  margin: 1vmin;
+  padding: 1vmin;
+  color: var(--white);
+  background-color: #c19ee0;
+  font-size: 2vmin;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  border: .1vmin solid var(--tan-2);
+  border-radius: .5vmin;
+  outline: none;
+  cursor: pointer;
+  
+  /* New styles for hover effect */
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+a.button:hover {
+  background-color: #a176c1;
+}

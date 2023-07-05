@@ -2,6 +2,7 @@ import * as ordersAPI from '../../utilities/orders-api'
 import { Link, useNavigate } from 'react-router-dom';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
+import '../../index.css'
 
 export default function Cart({ user, setUser, cart, setCart}) {
 
@@ -20,12 +21,12 @@ export default function Cart({ user, setUser, cart, setCart}) {
   return (
     <div className="NewOrderPage">
         <br/><br/>
-        <Link to="/orders/new" className="button btn-sm">CONTINUE SHOOPING</Link>
+        <Link to="/orders/new" className="button">CONTINUE SHOOPING</Link>
         <br/><br/>
         <br/>
         <OrderDetail order={cart} handleChangeQty={handleChangeQty} handleCheckout={handleCheckout} />
         <br/>
-        <Link to="/orders" className="button btn-sm">PREVIOUS ORDERS</Link>
+        <Link to="/orders" className="button">PREVIOUS ORDERS</Link>
         <br/><br/>
         <UserLogOut user={user} setUser={setUser} />
     </div>

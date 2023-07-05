@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReviewsForItem, createReview } from '../../utilities/reviews-api';
+import '../MenuItemDetail/MenuItemDetail.css'
 
 export default function MenuItemDetail({ menuItems, handleAddToOrder, user }) {
   const { itemId } = useParams();
@@ -79,6 +80,7 @@ export default function MenuItemDetail({ menuItems, handleAddToOrder, user }) {
           <div className="unavailable">Item not available</div>
         )}
       </div>
+      <div className="review-container">
       <div className="reviews">
         <h3>Reviews</h3>
         {reviews.length === 0 ? (
@@ -107,9 +109,12 @@ export default function MenuItemDetail({ menuItems, handleAddToOrder, user }) {
             name="rating"
             value={newReview.rating}
             onChange={handleChange}
+            min="0"
+            max="5"
           />
           <button type="submit">Submit Review</button>
         </form>
+      </div>
       </div>
     </div>
   );

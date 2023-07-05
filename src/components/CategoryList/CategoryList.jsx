@@ -1,5 +1,6 @@
 import './CategoryList.css'
 export default function CategoryList({ categories, activeCat, setActiveCat }) {
+
     const cats = categories.map(cat =>
       <div
       style={{ height: '80px', width: '80px' }}
@@ -12,7 +13,7 @@ export default function CategoryList({ categories, activeCat, setActiveCat }) {
       {cat.name}
     </div>
     );
-    console.log("this is cats", cats)
+    
     return (
       <div className="CategoryList">
         {cats}
