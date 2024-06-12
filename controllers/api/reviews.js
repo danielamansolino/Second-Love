@@ -1,14 +1,32 @@
 const Review = require('../../models/review');
 const Item = require('../../models/item');
 
+// async function indexReview(req, res) {
+//   try {
+//     const item = await Item.findById(req.params.itemId).populate('reviews');
+//     if (!item) {
+//       return res.status(404).json({ message: 'Item not found' });
+//     }
+//     const populatedReviews = await Review.populate(item.reviews, { path: 'user', select: 'username' });
+//     // Populate the reviews with the user data
+//     console.log('Reviews in indexReview:', populatedReviews);
+//     res.status(200).json(populatedReviews);
+//   } catch (error) {
+//     console.error('Error retrieving reviews:', error);
+//     res.status(500).json(error);
+//   }
+// }
 async function indexReview(req, res) {
   try {
-    const item = await Item.findById(req.params.itemId).populate('reviews');
+    const item = await Item.findById(req.params.itemId).populate({
+      path: 'reviews',
+      populate: { path: 'user', select: 'username' }
+    });
     if (!item) {
       return res.status(404).json({ message: 'Item not found' });
     }
-    const populatedReviews = await Review.populate(item.reviews, { path: 'user', select: 'username' });
-    // Populate the reviews with the user data
+    // Access the populated reviews
+    const populatedReviews = item.reviews;
     console.log('Reviews in indexReview:', populatedReviews);
     res.status(200).json(populatedReviews);
   } catch (error) {
@@ -16,6 +34,7 @@ async function indexReview(req, res) {
     res.status(500).json(error);
   }
 }
+
 
 async function createReview(req, res) {
   try {

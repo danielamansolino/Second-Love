@@ -34,7 +34,7 @@ export default function MenuItemDetail({ menuItems, handleAddToOrder, user }) {
     }
   };
 
-  async function addReview(reviewData, id) {
+  async function addReview(id, reviewData) {
     try {
       const review = await createReview(reviewData, id);
       setReviews(prevReviews => [...prevReviews, review]);
